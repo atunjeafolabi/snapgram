@@ -15,7 +15,7 @@ import {
   getPostById,
   getRecentPosts,
   getTopCreators,
-  getUserPosts,
+  getUserPosts, getUsers,
   likePost,
   savePost,
   searchPosts,
@@ -212,4 +212,11 @@ export const useGetTopCreators = () => {
     queryKey: [QUERY_KEYS.GET_USERS],
     queryFn: getTopCreators,
   });
+};
+
+export const useGetUsers = (limit?: number) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USERS],
+    queryFn: () => getUsers(limit),
+});
 };

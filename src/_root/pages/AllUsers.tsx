@@ -1,11 +1,15 @@
 import GridUsersList from "@/components/shared/GridUsersList";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useGetTopCreators } from "@/lib/react-query/queriesAndMutations";
+import { useGetUsers } from "@/lib/react-query/queriesAndMutations";
 
 const AllUsers = () => {
-  const { data: creators, isPending: isCreatorsLoading } = useGetTopCreators();
+  const {
+    data: users,
+    isLoading: isUsersLoading,
+    isError: isErrorUsers,
+  } = useGetUsers(10);
 
-  if (isCreatorsLoading) {
+  if (isUsersLoading) {
     return (
       <div className="rightsidebar custom-scrollbar">
         <div className="w-full flex items-start mb-10">
@@ -24,7 +28,7 @@ const AllUsers = () => {
     <div className="users-container">
       <div className="users-inner_container">
         <h2 className="h3-bold md:h2-bold w-full">All Users</h2>
-        <GridUsersList creators={creators} />
+        <GridUsersList creators={users} />
       </div>
     </div>
   );
